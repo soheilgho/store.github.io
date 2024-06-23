@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet"> <!-- Add a new font -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure body takes at least full viewport height */
+            position: relative;
+        }
+        .top-advertisement {
+            width: 100%;
+            height: 80px; /* Adjust the height as needed */
+            background-color: yellow; /* Adjust the background color as needed */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed; /* Fix the element to the top of the viewport */
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1; /* Ensure it is above other content */
+        }
+        .top-advertisement video {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .bottom-rectangle {
+            width: 100%;
+            height: 60px; /* Adjust the height to fit the icon and text */
+            background-color: gray;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Space the items */
+            padding: 0 0px; /* Adjust padding as needed */
+            position: fixed; /* Fix the element to the bottom of the viewport */
+            bottom: 0;
+            left: 0;  
+            right: 0;
+        }
+        .icons-right {
+            display: flex;
+            align-items: center;
+            position: absolute; /* Absolute positioning within bottom rectangle */
+            right: 25px; /* Adjust as needed for spacing */
+        }
+        .icon-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .icons-right .material-icons + .material-icons {
+            margin-left: 20px; /* Adjusted margin between icons */
+        }
+        .left-icon {
+            margin-left: 30px; /* Adjust the margin to push the manage_accounts icon to the right */
+        }
+        .home-icon-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .rectangle-container {
+            display: flex;
+            overflow: hidden; /* Hide overflow to show only the visible rectangle */
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            margin-top: 100px; /* Add margin from the top */
+        }
+        .rectangle-wrapper {
+            display: flex;
+            width: 100%; /* Width to accommodate all rectangles side by side */
+            transition: transform 0.5s ease-in-out; /* Smooth transition */
+        }
+        .rectangle {
+            flex: 1;
+            height: 100px; /* Adjust height as needed */
+            background-color: blue; /* Adjust background color as needed */
+            border-radius: 15px; /* Rounded corners */
+            display: flex; /* Ensure the rectangles are flex items */
+            align-items: center;
+            justify-content: center;
+            color: white; /* Text color inside the rectangle */
+            margin: 0 6px; /* Space between the rectangles */
+            min-width: 95vw; /* Ensure each rectangle takes full viewport width */
+        }
+        .circle-buttons-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 columns */
+            grid-template-rows: repeat(3, 1fr); /* 3 rows */
+            gap: 90px; /* Space between buttons */
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px; /* Add some space above the buttons */
+        }
+        .circle-button {
+            width: 100px; /* Adjust size as needed */
+            height: 100px; /* Adjust size as needed */
+            background-color: lightgray; /* Adjust color as needed */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            margin-left: 30px;
+        }
+        .circle-button img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 50%;
+        }
+        .circle-button:hover {
+            background-color: darkgray; /* Change color on hover */
+        }
+        .red-rectangle {
+            position: relative; /* Position relative for absolute positioning inside */
+            width: 100%;
+            height: 290px; /* Adjust the height as needed */
+            background-color: red; /* Red background color */
+            margin-top: 20px; /* Add some margin to separate from above content */
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; /* Align text to the right */
+            color: white; /* Text color inside the rectangle */
+            padding-right: 20px; /* Add padding to separate text from edges */
+        }
+        .red-rectangle::before {
+            content: "پیشنهاد شگفت انگیز"; /* Add the Persian text */
+            position: absolute;
+            top: 10%;
+            transform: translateY(-50%);
+            right: 15px; /* Adjust the positioning as needed */
+            font-size: 17px; /* Adjust font size */
+        }
+        .timer {
+            position: absolute;
+            top: 10%;
+            transform: translateY(-90%);
+            right: 250px; /* Adjust the positioning as needed */
+            font-size: 20px; /* Adjust font size */
+            padding: 10px 20px; /* Add padding */
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+            border-radius: 10px; /* Rounded corners */
+            font-family: 'dancing script', sans-serif; /* Use the new font */
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add shadow */
+        }
+        .cart-text {
+            color: white;
+            font-size: 14px; /* Adjust font size as needed */
+            margin-top: 2px; /* Space between icon and text */
+        }
+        .home-text {
+            color: white;
+            font-size: 14px; /* Adjust font size as needed */
+            margin-top: 2px; /* Space between icon and text */
+        }
+        .manage-text {
+            color: white;
+            font-size: 14px; /* Adjust font size as needed */
+            margin-top: 2px; /* Space between icon and text */
+        }
+    </style>
+    <title>Gray Rectangle at Bottom with Home and Cart Icons</title>
+</head>
+<body>
+    <div class="top-advertisement">
+        <!-- Add your advertisement video here -->
+        <video autoplay muted loop>
+            <source src="/storage/emulated/0/Download/e2f700a7ba02231be7082396631aa62b33756634-720p.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <video autoplay muted loop>
+            <source src="/storage/emulated/0/Download/36d002de50b0c4bfe5ea3f66eb2f91cf56156298-720p.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <video autoplay muted loop>
+            <source src="/storage/emulated/0/Download/8688a32ca5e7ef457ce0ee4ed823901e48404368-720p.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Container for the rectangles -->
+    <div class="rectangle-container">
+        <div class="rectangle-wrapper">
+            <!-- Individual rectangles -->
+            <div class="rectangle" style="background-color: red;"></div>
+            <div class="rectangle" style="background-color: blue;"></div>
+            <div class="rectangle" style="background-color: green;"></div>
+            <div class="rectangle" style="background-color: orange;"></div>
+        </div>
+    </div>
+
+    <!-- Container for the circle buttons -->
+    <div class="circle-buttons-container">
+        <div class="circle-button">
+            <img src="https://www.digikala.com/mag/wp-content/uploads/2022/05/Choosing-a-phone-.jpg" alt="Image 1">
+        </div>
+        <div class="circle-button">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrVC8uLtolpTdteamSUFuVcbk9I4SXKKrhqw&s" alt="Image 2">
+        </div>
+        <div class="circle-button">
+            <img src="https://bamitak.com/wp-content/uploads/2023/09/LG-WASHING-MACHINE-F2T2-1.jpg" alt="Image 3">
+        </div>
+        <div class="circle-button">
+            <img src="https://dkstatics-public.digikala.com/digikala-products/06ca984c85a048a5a107960e0d63f6b09ca687e2_1644233946.jpg" alt="Image 4">
+        </div>
+        <div class="circle-button">
+            <img src="https://techsiro.com/wp-content/uploads/2023/10/ps5-slim-standard-edition-1tb-01-1697032961.webp" alt="Image 5">
+        </div>
+        <div class="circle-button">
+            <img src="https://image.torob.com/base/images/to/2X/to2XqfUpuwJsQ91N.jpg" alt="Image 6">
+        </div>
+        <div class="circle-button">
+            <img src="https://spana.ir/wp-content/uploads/2022/08/299373586_483160773636209_5015785338190136645_n.jpg" alt="Image 7">
+        </div>
+        <div class="circle-button">
+            <img src="https://asanjahaz.com/wp-content/uploads/2023/06/29-1.jpg" alt="Image 8">
+        </div>
+        <div class="circle-button">
+            <img src="https://mashinsharji.com/wp-content/uploads/2023/11/va-ferrari-for-two-7.jpg" alt="Image 9">
+        </div>
+        <div class="circle-button">
+            <img src="https://khanehshokolati.com/wp-content/uploads/2022/07/6-1.jpg" alt="Image 10">
+        </div>
+        <div class="circle-button">
+            <img src="https://perancesziba.com/wp-content/uploads/2020/09/kids-wedding-dress-413.jpg" alt="Image 11">
+        </div>
+        <div class="circle-button">
+            <img src="https://www.bfarsh.com/wp-content/uploads/2023/11/%D9%81%D8%B1%D8%B4-%D8%B7%D9%88%D8%B3%DB%8C-%D8%B1%D9%88%D8%B4%D9%86-%D8%B7%D8%B1%D8%AD-%D8%AF%D9%84%D8%B1%D8%A8%D8%A7.webp" alt="Image 12">
+        </div>
+    </div>
+
+    <!-- Red rectangle below the circle buttons -->
+    <div class="red-rectangle">
+        <span class="timer" id="countdown">02:00:00</span>
+        <!-- Persian text already added through CSS before element -->
+    </div>
+
+    <!-- Bottom rectangle with icons -->
+    <div class="bottom-rectangle">
+        <div class="icon-container left-icon" onclick="openManageAccounts()">
+            <span class="material-icons">manage_accounts</span>
+            <span class="manage-text">مدیریت</span>
+        </div>
+        <div class="home-icon-container">
+            <span class="material-icons">home</span>
+            <span class="home-text">خانه</span>
+        </div>
+        <div class="icons-right">
+            <div class="icon-container">
+                <span class="material-icons">shopping_cart</span>
+                <span class="cart-text">سبد خرید</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openManageAccounts() {
+            window.location.href = '2.html';
+        }
+
+        const rectangleWrapper = document.querySelector('.rectangle-wrapper');
+        const rectangles = document.querySelectorAll('.rectangle');
+        let currentIndex = 0;
+
+        function showNextRectangle() {
+            currentIndex = (currentIndex + 1) % rectangles.length; // Move to the next index
+            const offset = -currentIndex * 100; // Calculate offset for transform
+            rectangleWrapper.style.transform = `translateX(${offset}vw)`; // Apply transform for sliding effect
+        }
+
+        setInterval(showNextRectangle, 2000); // Change every 2 seconds
+
+        // Countdown timer
+        const countdownElement = document.getElementById('countdown');
+        const targetTime = new Date().getTime() + 2 * 60 * 60 * 1000; // Set target time to 2 hours from now
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = targetTime - now;
+
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownElement.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                countdownElement.textContent = "00:00:00";
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
